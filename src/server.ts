@@ -1,14 +1,13 @@
 import app from "./app";
+import { env } from "./config";
+import { connectDB } from "./database";
 
-const PORT = process.env.PORT || 3300;
+const startServer = async () => {
+  await connectDB();
 
-app.listen(PORT, () => {
-  console.clear();
+  app.listen(env.port, () => {
+    console.log(`🚀 Server running on port ${env.port}`);
+  });
+};
 
-  console.log("=======================================");
-  console.log("🚀 School Backend Server Started");
-  console.log("=======================================");
-  console.log(`🌍 Environment : ${process.env.NODE_ENV || "development"}`);
-  console.log(`🔗 Local URL   : http://localhost:${PORT}`);
-  console.log("=======================================\n");
-});
+startServer();
